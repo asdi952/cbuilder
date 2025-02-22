@@ -8,3 +8,4 @@
 #define DEFINE_FUNCTION(NAME, RETURN, PARAMS) RETURN (*NAME) PARAMS
 
 #define FORCOUNT(COUNT, i) for(uint i = 0; i < COUNT; i++)
+#define FORARRAY(NAME, i) for(uint i = 0; i < NAME##_count; i++)

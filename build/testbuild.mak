@@ -44,16 +44,17 @@ run_srcunit_exe_w_target:
 	@$(srcunit_exefile)  $(shell nm -D --defined $(target_sharedlib_file) | awk '{ print $$3}')
 
 build_target: build_target_ofiles build_srcunit_ofiles
-	gcc -shared $(target_all_ofiles) -o $(target_sharedlib_file) $(lib_folders_proc) $(lib_names_proc)
+	@gcc -g -shared $(target_all_ofiles) -o $(target_sharedlib_file) $(lib_folders_proc) $(lib_names_proc)
 
-build_target_ofiles: $(target_test_ofiles) $(srcunit_folder)/test.h
-	@echo  $(target_test_dfiles)
+build_target_ofiles: $(target_test_ofiles) 
 	@make -C $(target_folder) -f zMakefile.mak build_srcunit_ofiles --no-print-directory
+
+$(target_test_ofiles): $(srcunit_folder)/test.h
 
 $(target_tmp_folder)/%.o: $(target_folder)/%.c
 	@echo "-->" $(patsubst $(src_path)/%, %, $<)
 	@mkdir -p $(dir $@)
-	@gcc -fPIC -c $< -o $@ $(include_folders_proc) -I$(srcunit_folder)
+	@gcc -g -fPIC -c $< -o $@ $(include_folders_proc) -I$(srcunit_folder)
 
 clean_target:
 	@rm $(target_sharedlib_file) 2> /dev/null || true

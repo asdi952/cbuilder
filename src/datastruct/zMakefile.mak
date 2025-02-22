@@ -9,7 +9,7 @@ export lib_names=
 export include_srcunits_folders= utils
 export join_srcunits_builds=
 
-export exename= cbuilder
+export exename= datastruct
 
 build_makefile_name= basicbuild
 

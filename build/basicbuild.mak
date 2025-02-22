@@ -41,11 +41,10 @@ endif
 .PHONY: run_srcunit_exe build_srcunit_exe build_srcunit_ofiles clean_srcunit print_srcunit
 
 run_srcunit_exe: build_srcunit_exe
-	@echo basic
 	@$(srcunit_exefile) 
 
 build_srcunit_exe: build_srcunit_ofiles
-	@gcc $(srcunit_all_ofiles) -o $(srcunit_exefile) $(lib_folders_proc) $(lib_names_proc)
+	@gcc -g $(srcunit_all_ofiles) -o $(srcunit_exefile) $(lib_folders_proc) $(lib_names_proc)
 
 build_srcunit_ofiles: $(srcunit_ofiles) 
 	@for srcunit in $(join_srcunits_builds); do \
@@ -56,7 +55,7 @@ build_srcunit_ofiles: $(srcunit_ofiles)
 $(srcunit_tmp_folder)/%.o: $(srcunit_folder)/%.c
 	@echo "-->" $(patsubst $(src_path)/%, %, $<)
 	@mkdir -p $(dir $@)
-	@gcc -MMD -MP -c $< -o $@ $(include_folders_proc) 
+	@gcc -g -MMD -MP -c $< -o $@ $(include_folders_proc) 
 
 clean_srcunit: $(clean_deps)
 	@rm $(srcunit_exefile) 2> /dev/null || true
