@@ -11,7 +11,7 @@ export test_lib_folders=
 export test_lib_names=
 
 export include_srcunits_folders= utils datastruct 
-export join_srcunits_builds= datastruct
+export join_srcunits_builds= datastruct utils
 
 build_makefile_name= testbuild
 

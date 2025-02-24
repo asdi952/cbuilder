@@ -1,12 +1,12 @@
 #pragma once
 #include <pch.h>
 
-DEFINE_ENUM(List_State,
-    List_state_uinit,
+DEFINE_ENUM(List_state,
+    List_state_uinit = 10,
     List_state_init,
 );
 DEFINE_STRUCT(List, 
-    List_State state;
+    List_state state;
 
     uint unitsize;
 
@@ -19,6 +19,7 @@ DEFINE_STRUCT(List,
 #define FORLIST(LISTP, i) for(uint i = 0; i < (LISTP)->count; i++)
 
 void list_init(List * list, uint unisize);
+void list_deinit(List * list);
 
 void* list_get_ptr(List *list, uint index);
 void list_get(List *list, uint index, void* dest);

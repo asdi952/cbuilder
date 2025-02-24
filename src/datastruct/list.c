@@ -7,13 +7,19 @@
 
 void list_init(List * list, uint unisize)
 {
-    assert(list->state == List_state_uinit);
+    assert(list->state != List_state_init);
     list->state = List_state_init;
 
     list->unitsize = unisize;
     list->capacity = 0;    
     list->count = 0;    
     list->data = NULL;
+}
+
+void list_deinit(List * list)
+{
+    assert(list->state == List_state_init);
+    free(list->data);
 }
 
 void reallocation(List *list, uint capacity)
